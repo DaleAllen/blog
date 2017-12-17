@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>js判断浏览器 | 张铎的技术博客 | Dale Zhang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="javascript 判断浏览器方法众多,由于浏览器版本的不断迭代更新,有的方法已经过时失效,因此收集到此文以做备忘,所有方法已验证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js判断浏览器">
+<meta property="og:url" content="https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/index.html">
+<meta property="og:site_name" content="张铎的技术博客">
+<meta property="og:description" content="javascript 判断浏览器方法众多,由于浏览器版本的不断迭代更新,有的方法已经过时失效,因此收集到此文以做备忘,所有方法已验证">
+<meta property="og:updated_time" content="2017-12-17T11:00:33.798Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js判断浏览器">
+<meta name="twitter:description" content="javascript 判断浏览器方法众多,由于浏览器版本的不断迭代更新,有的方法已经过时失效,因此收集到此文以做备忘,所有方法已验证">
+    
+    <link rel="shortcut icon" href="/zhangduo.github.io/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/zhangduo.github.io/img/brand.jpg)">
+      <div class="brand">
+        <a href="/zhangduo.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/zhangduo.github.io/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Dale</h5>
+          <a href="mailto:zhangduo914@gmail.com" title="zhangduo914@gmail.com" class="mail">zhangduo914@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://daleallen.github.io/zhangduo.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">js判断浏览器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">js判断浏览器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-30T16:43:05.000Z" itemprop="datePublished" class="page-time">
+  2017-08-31
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IE浏览器"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#IE&#x6D4F;&#x89C8;&#x5668;" class="headerlink" title="IE&#x6D4F;&#x89C8;&#x5668;"></a>IE&#x6D4F;&#x89C8;&#x5668;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他浏览器"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x5176;&#x4ED6;&#x6D4F;&#x89C8;&#x5668;" class="headerlink" title="&#x5176;&#x4ED6;&#x6D4F;&#x89C8;&#x5668;"></a>&#x5176;&#x4ED6;&#x6D4F;&#x89C8;&#x5668;</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-js判断浏览器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">js判断浏览器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-31 00:43:05" datetime="2017-08-30T16:43:05.000Z"  itemprop="datePublished">2017-08-31</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>javascript 判断浏览器方法众多,由于浏览器版本的不断迭代更新,有的方法已经过时失效,因此收集到此文以做备忘,所有方法已验证<br><a id="more"></a></p>
+<h2 id="IE浏览器"><a href="#IE浏览器" class="headerlink" title="IE浏览器"></a>IE浏览器</h2><p>只有IE 浏览器的 window 对象有<code>ActiveXObject</code>函数,可以借此判断是否是 IE 浏览器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function isIE()&#123;</span><br><span class="line">  return !!window.ActiveXObject</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是在 <code>IE11</code>中,<code>typeOf window.ActiveXObject</code>为<code>undefined</code><br>奇怪的是<code>&#39;ActiveXObject&#39; in window</code>返回结果是<code>true</code>,<code>ActiveXObject</code>依然存在于window对象中,并且:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">!!window.ActiveXObject</span><br><span class="line">&lt;!-- false --&gt;</span><br><span class="line">Object.prototype.toString.call(window.ActiveXObject)</span><br><span class="line">&lt;!-- &apos;[object Function]&apos; --&gt;</span><br><span class="line">window.ActiveXObject == undefined</span><br><span class="line">&lt;!-- true --&gt;</span><br><span class="line">window.ActiveXObject === undefined</span><br><span class="line">&lt;!-- false --&gt;</span><br></pre></td></tr></table></figure></p>
+<p>因此使用<code>window.ActiveXObject</code>判断并不可靠,调整<code>isIE</code>方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function isIE()&#123;</span><br><span class="line">  return (!!window.ActiveXObject || &apos;ActiveXObject&apos; in window)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>兼容到<code>IE11</code> IE11+<br><code>window.attachEvent</code>函数是 IE 浏览器中特有的,但在IE11版本中不再支持,可以根据此特性判断是否是IE11以下版本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function isUnderIE11()</span><br><span class="line">&#123;</span><br><span class="line">  return isIE() &amp;&amp; !!window.attachEvent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>兼容到<code>IE10</code> IE10+<br><code>window.atob</code>函数,从<code>IE10</code>开始支持,其他浏览器也支持该函数,可以借此判断是否是IE10以下版本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function isUnderIE10()&#123;</span><br><span class="line">  return !window.atob</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>兼容到<code>IE9</code> IE9+<br>对于IE8及以下浏览器常称为<strong>非标准浏览器</strong>,而以上版本称为<strong>标准浏览器</strong>;在标准浏览器中,如果数组里面最后一个字符为逗号,JS引擎会自动剔除它<br>对于标准浏览器,-[1,]会转换为1;而非标准浏览器因为没有剔除数组数组最后的逗号,转换为<code>NaN</code>,借此特性判断是否是IE9以下版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function isUnderIE9&#123;</span><br><span class="line">  return !-[1,]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>兼容到<code>IE8</code> IE8+<br><code>document.querySelector</code>函数在 IE 浏览器中从<code>IE8</code>开始支持,其他浏览器开始支持版本各不相同,借此特性判断是否是 IE8以下版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function isUnderIE8&#123;</span><br><span class="line">  return isIE() &amp;&amp; !document.querySelector</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="其他浏览器"><a href="#其他浏览器" class="headerlink" title="其他浏览器"></a>其他浏览器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">function browser()&#123;</span><br><span class="line">  var userAgent = window.navigator.userAgent;</span><br><span class="line">  function isEdge()&#123;</span><br><span class="line">    return userAgent.indexOf(&apos;Edge&apos;) !== -1</span><br><span class="line">  &#125;</span><br><span class="line">  function isChrome()&#123;</span><br><span class="line">  &lt;!-- window.chrome 在 opera(webkit内核)及360等浏览器中均存在,因此需要再判断 window.chrome.webstore --&gt;</span><br><span class="line">    return !!window.chrome &amp;&amp; !!window.chrome.webstore</span><br><span class="line">  &#125;</span><br><span class="line">  function isOpera()&#123;</span><br><span class="line">  &lt;!-- 采用webkit内核的Opera浏览器,不存在 window.opera,而是存在 window.opr --&gt;</span><br><span class="line">    return (!!window.opr &amp;&amp; !!opr.addons) || !!window.opera || userAgent.indexOf(&apos;OPR&apos;) !== -1</span><br><span class="line">  &#125;</span><br><span class="line">  function isFirefox()&#123;</span><br><span class="line">  &lt;!-- userAgent中包括 FxiOS 是火狐 for ios 版本--&gt;</span><br><span class="line">    return userAgent.indexOf(&apos;Firefox&apos;) !== -1 || userAgent.indexOf(&apos;FxiOS&apos;) !== -1</span><br><span class="line">  &#125;</span><br><span class="line">  function isSafari()&#123;</span><br><span class="line">  &lt;!-- chrome和 pera浏览器下 userAgent 均包含&quot;Safari&quot;,而safari浏览器userAgent并不包含&quot;Chrome&quot; --&gt;</span><br><span class="line">    window.safari || (userAgent.indexOf(&quot;Safari&quot;) !== -1 &amp;&amp; userAgent.indexOf(&quot;Chrome&quot;) === -1)</span><br><span class="line">  &#125;</span><br><span class="line">  return &#123;</span><br><span class="line">    isEdge: isEdge,</span><br><span class="line">    isChrome: isChrome,</span><br><span class="line">    isOpera: isOpera,</span><br><span class="line">    isFirefox: isFirefox,</span><br><span class="line">    isSafari: isSafari</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-12-17T11:00:33.798Z" itemprop="dateUpdated">2017-12-17 19:00:33</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/zhangduo.github.io/2017/08/31/js判断浏览器/" target="_blank" rel="external">https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/</a>
+        
+    </div>
+    <footer>
+        <a href="https://daleallen.github.io/zhangduo.github.io">
+            <img src="/zhangduo.github.io/img/avatar.jpg" alt="Dale">
+            Dale
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/&title=《js判断浏览器》 — 张铎的技术博客&pic=https://daleallen.github.io/zhangduo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/&title=《js判断浏览器》 — 张铎的技术博客&source=javascript 判断浏览器方法众多,由于浏览器版本的不断迭代更新,有的方法已经过时失效,因此收集到此文以做备忘,所有方法已验证" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js判断浏览器》 — 张铎的技术博客&url=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/zhangduo.github.io/2017/08/01/数组去重/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">数组去重</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/zhangduo.github.io/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/zhangduo.github.io/img/wechat.jpg" data-alipay="/zhangduo.github.io/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Dale &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/&title=《js判断浏览器》 — 张铎的技术博客&pic=https://daleallen.github.io/zhangduo.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/&title=《js判断浏览器》 — 张铎的技术博客&source=javascript 判断浏览器方法众多,由于浏览器版本的不断迭代更新,有的方法已经过时失效,因此收集到此文以做备忘,所有方法已验证" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js判断浏览器》 — 张铎的技术博客&url=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://daleallen.github.io/zhangduo.github.io/2017/08/31/js判断浏览器/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/zhangduo.github.io/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
