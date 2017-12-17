@@ -13,7 +13,7 @@
     
     
     
-    <title>张铎的技术博客 | Dale Zhang&#39;s blog</title>
+    <title>Dale&#39;s blog | Dale Zhang&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -21,11 +21,12 @@
     
     <meta name="keywords" content="">
     <meta property="og:type" content="website">
-<meta property="og:title" content="张铎的技术博客">
+<meta property="og:title" content="Dale&#39;s blog">
 <meta property="og:url" content="https://daleallen.github.io/zhangduo.github.io/index.html">
-<meta property="og:site_name" content="张铎的技术博客">
+<meta property="og:site_name" content="Dale&#39;s blog">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张铎的技术博客">
+<meta name="twitter:title" content="Dale&#39;s blog">
     
     <link rel="shortcut icon" href="/zhangduo.github.io/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -111,13 +112,13 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">张铎的技术博客</div>
+        <div class="flex-col header-title ellipsis">Dale&#39;s blog</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -133,7 +134,7 @@
 <header class="content-header index-header">
 
     <div class="container fade-scale">
-        <h1 class="title">张铎的技术博客</h1>
+        <h1 class="title">Dale&#39;s blog</h1>
         <h5 class="subtitle">
             
                 Dale Zhang's blog
@@ -149,6 +150,54 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-js异步编程实践"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-14 00:00:00" datetime="2017-10-13T16:00:00.000Z"  itemprop="datePublished">2017-10-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/zhangduo.github.io/categories/javascript/">javascript</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/zhangduo.github.io/2017/10/14/js异步编程实践/">javascript 异步编程实践</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        众所周知,由于历史原因, javascript是单线程的.在工作的过程中,一定遇到过异步操作,比如 ajax 请求,由于 IO,网络,数据库等各种原因不能立即拿到返回结果,过于我们通常会选择使用回调函数.但是如果有多个并发请求,尤其是继发请求.如果采用同步的方式,会影响到用户体验,因为页面被阻塞了,只能等到请求结果返回.所以通常将多个异步操作嵌套,这样的方式称之为 回调地狱
+回调地狱之所以被...
+    
+
+        <a href="/zhangduo.github.io/2017/10/14/js异步编程实践/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/zhangduo.github.io/tags/回调地狱-Promise-Generator-Async/">回调地狱 Promise Generator Async</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-js判断浏览器"
@@ -181,7 +230,7 @@
     
 
         <a href="/zhangduo.github.io/2017/08/31/js判断浏览器/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -220,13 +269,108 @@
     
 
         <a href="/zhangduo.github.io/2017/08/01/数组去重/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/zhangduo.github.io/tags/ES6/">ES6</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-javascript之this"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-07-01 00:00:00" datetime="2017-06-30T16:00:00.000Z"  itemprop="datePublished">2017-07-01</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/zhangduo.github.io/categories/原生-js/">原生 js</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/zhangduo.github.io/2017/07/01/javascript之this/">javascript之this</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        this关键字不同于其他编程语言地方在于,其指向并不是声明的位置,而是被调用时的执行环境,因此this的指向并不是固定不变的,而是动态的.
+    
+
+        <a href="/zhangduo.github.io/2017/07/01/javascript之this/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/zhangduo.github.io/tags/this/">this</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-javascrpit之闭包"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-06-18 00:43:05" datetime="2017-06-17T16:43:05.000Z"  itemprop="datePublished">2017-06-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/zhangduo.github.io/categories/原生js/">原生js</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/zhangduo.github.io/2017/06/18/javascrpit之闭包/">javascript之闭包</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+当函数可以记住并访问所在的词法作用域,即使函数是在当前词法作用域之外执行,这时就产生了闭包
+    
+
+        <a href="/zhangduo.github.io/2017/06/18/javascrpit之闭包/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/zhangduo.github.io/tags/闭包/">闭包</a></li></ul>
 
     </div>
     
@@ -271,7 +415,7 @@
     
 
         <a href="/zhangduo.github.io/2017/06/14/防抖和节流/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -306,7 +450,7 @@
 
         <p>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
@@ -328,7 +472,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/&title=张铎的技术博客&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/&title=Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -338,7 +482,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/&title=张铎的技术博客&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/&title=Dale's blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -348,7 +492,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=张铎的技术博客&url=https://daleallen.github.io/zhangduo.github.io/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

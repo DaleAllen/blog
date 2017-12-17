@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>javascript之闭包 | Dale&#39;s blog | Dale Zhang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="闭包">
+    <meta name="description" content="当函数可以记住并访问所在的词法作用域,即使函数是在当前词法作用域之外执行,这时就产生了闭包">
+<meta name="keywords" content="闭包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript之闭包">
+<meta property="og:url" content="https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/index.html">
+<meta property="og:site_name" content="Dale&#39;s blog">
+<meta property="og:description" content="当函数可以记住并访问所在的词法作用域,即使函数是在当前词法作用域之外执行,这时就产生了闭包">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-12-17T12:43:20.708Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript之闭包">
+<meta name="twitter:description" content="当函数可以记住并访问所在的词法作用域,即使函数是在当前词法作用域之外执行,这时就产生了闭包">
+    
+    <link rel="shortcut icon" href="/zhangduo.github.io/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/zhangduo.github.io/img/brand.jpg)">
+      <div class="brand">
+        <a href="/zhangduo.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/zhangduo.github.io/img/person.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Dale</h5>
+          <a href="mailto:zhangduo914@gmail.com" title="zhangduo914@gmail.com" class="mail">zhangduo914@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://daleallen.github.io/zhangduo.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javascript之闭包</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javascript之闭包</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-17T16:43:05.000Z" itemprop="datePublished" class="page-time">
+  2017-06-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/zhangduo.github.io/categories/原生js/">原生js</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是闭包"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x95ED;&#x5305;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x95ED;&#x5305;"></a>&#x4EC0;&#x4E48;&#x662F;&#x95ED;&#x5305;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用闭包"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;&#x95ED;&#x5305;" class="headerlink" title="&#x4F7F;&#x7528;&#x95ED;&#x5305;"></a>&#x4F7F;&#x7528;&#x95ED;&#x5305;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#循环和闭包"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x5FAA;&#x73AF;&#x548C;&#x95ED;&#x5305;" class="headerlink" title="&#x5FAA;&#x73AF;&#x548C;&#x95ED;&#x5305;"></a>&#x5FAA;&#x73AF;&#x548C;&#x95ED;&#x5305;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模块"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x6A21;&#x5757;" class="headerlink" title="&#x6A21;&#x5757;"></a>&#x6A21;&#x5757;</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-javascrpit之闭包"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javascript之闭包</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-18 00:43:05" datetime="2017-06-17T16:43:05.000Z"  itemprop="datePublished">2017-06-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/zhangduo.github.io/categories/原生js/">原生js</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <hr>
+<p>当函数可以记住并访问所在的<code>词法作用域</code>,即使函数是在当前词法作用域之外执行,这时就产生了闭包<br><a id="more"></a></p>
+<h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><blockquote>
+<p>当函数可以记住并访问所在的<code>词法作用域</code>,即使函数是在当前词法作用域之外执行,这时就产生了闭包</p>
+</blockquote>
+<p>当函数执行完后,会销毁函数内部的作用域,这被成为<code>垃圾回收机制</code>.而闭包依然保存了对作用域的引用,避免被<code>回收</code>.需要注意的是闭包的滥用会导致内存的泄露.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">  var id = 1;</span><br><span class="line">  function bar()&#123;</span><br><span class="line">    console.log(id);</span><br><span class="line">  &#125;</span><br><span class="line">  return bar;</span><br><span class="line">&#125;</span><br><span class="line">var foo1 = foo();</span><br><span class="line">foo1(); // 1</span><br></pre></td></tr></table></figure>
+<p><code>foo</code>函数执行后,将<code>bar</code>函数本身返回并赋值给<code>foo1</code>变量,此时<code>foo</code>函数内部作用域并没有被垃圾回收,因为<code>foo1</code>保留了对其作用域的引用,这就是<code>闭包</code>.</p>
+<h2 id="使用闭包"><a href="#使用闭包" class="headerlink" title="使用闭包"></a>使用闭包</h2><p>在定时器,事件监听,ajax 请求或者其他任何异步或者同步中使用回调函数,都是在使用闭包</p>
+<h3 id="循环和闭包"><a href="#循环和闭包" class="headerlink" title="循环和闭包"></a>循环和闭包</h3><p>看这一经典面试题:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0; i &lt;= 5; i++)&#123;</span><br><span class="line">  setTimeout(function()&#123;</span><br><span class="line">      console.log(i);</span><br><span class="line">    &#125;,i*1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>预期的返回结果是依次输出 0 1 2 3 4 5,而事实上返回结果是依次输出每秒一次 6 6 6 6 6 6<br>事实上延迟函数的回调是在循环结束后才执行的.每次循环过程中并没有创造新的词法作用域,传入回调函数的参数 i在循环后为为6,这里只有一个变量 i, 没有其他副本.<br> 我们可以使用立即执行函数调用来创造作用域,并将参数 i 传入:<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0; i &lt;= 5; i++)&#123;</span><br><span class="line">	(function(i)&#123;</span><br><span class="line">		setTimeout(function()&#123;</span><br><span class="line">			console.log(i);</span><br><span class="line">		&#125;,i*1000)</span><br><span class="line">	&#125;)(i) // 如果没有将参数 i 传入,也只是创造一个空的作用域</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>或者使用<code>let</code>创造块级作用域:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(let i=0; i &lt;= 5; i++)&#123;</span><br><span class="line">	setTimeout(function()&#123;</span><br><span class="line">		console.log(i);</span><br><span class="line">	&#125;,i*1000)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>在面向对象编程中,我们通过构造器<code>new</code>一个新的对象,而 js 可以通过闭包实现类似效果,这种模式被称为<code>模块</code>.以计时器为例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">function createCounter() &#123;</span><br><span class="line">	var counter = 0;</span><br><span class="line">	function increase() &#123;</span><br><span class="line">		counter++;</span><br><span class="line">		console.log(counter);</span><br><span class="line">	&#125;</span><br><span class="line">	function decrease() &#123;</span><br><span class="line">		counter--;</span><br><span class="line">		console.log(counter);</span><br><span class="line">	&#125;</span><br><span class="line">	return &#123;</span><br><span class="line">		increase:increase,</span><br><span class="line">		decrease:decrease</span><br><span class="line">	&#125;; // 创造闭包,返回 increase 和 decrease 方法,该方法均保留了 createCounter()函数的作用域</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var counter1 = createCounter();</span><br><span class="line">counter1.increase(); // 1</span><br><span class="line">counter1.increase(); // 2</span><br><span class="line">counter1.increase(); // 3</span><br><span class="line">counter1.decrease(); // 2</span><br><span class="line"></span><br><span class="line">var counter2 = createCounter(); // 又创建了新的计数器,新的实例</span><br><span class="line">counter2.increase(); // 1</span><br></pre></td></tr></table></figure></p>
+<p><code>模块</code>必须有一个封闭函数,该函数至少被调用一次,每次调用产生都会创建新的模块实例.并且函数必须返回至少一个内部函数或者包含内部函数的对象,从而形成<code>闭包</code><br>当只需要一个实例时,通过立即执行函数实现单例模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var counter = (function createCounter() &#123;</span><br><span class="line">	var counter = 0;</span><br><span class="line">	function increase() &#123;</span><br><span class="line">		counter++;</span><br><span class="line">	&#125;</span><br><span class="line">	return &#123;increase:increase&#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-12-17T12:43:20.708Z" itemprop="dateUpdated">2017-12-17 20:43:20</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/zhangduo.github.io/2017/06/18/javascrpit之闭包/" target="_blank" rel="external">https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/</a>
+        
+    </div>
+    <footer>
+        <a href="https://daleallen.github.io/zhangduo.github.io">
+            <img src="/zhangduo.github.io/img/person.jpg" alt="Dale">
+            Dale
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/zhangduo.github.io/tags/闭包/">闭包</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/&title=《javascript之闭包》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/&title=《javascript之闭包》 — Dale's blog&source=
+当函数可以记住并访问所在的词法作用域,即使函数是在当前词法作用域之外执行,这时就产生了闭包" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javascript之闭包》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/zhangduo.github.io/2017/07/01/javascript之this/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">javascript之this</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/zhangduo.github.io/2017/06/14/防抖和节流/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">防抖(Debounce)和节流(Throttle)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/zhangduo.github.io/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/zhangduo.github.io/img/wechat.jpg" data-alipay="/zhangduo.github.io/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Dale &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/&title=《javascript之闭包》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/&title=《javascript之闭包》 — Dale's blog&source=
+当函数可以记住并访问所在的词法作用域,即使函数是在当前词法作用域之外执行,这时就产生了闭包" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javascript之闭包》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://daleallen.github.io/zhangduo.github.io/2017/06/18/javascrpit之闭包/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/zhangduo.github.io/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
