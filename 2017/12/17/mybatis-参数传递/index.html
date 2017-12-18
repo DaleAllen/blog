@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>No title | Dale&#39;s blog | Dale Zhang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集.传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL 注">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No title">
+<meta property="og:url" content="https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/index.html">
+<meta property="og:site_name" content="Dale&#39;s blog">
+<meta property="og:description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集.传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL 注">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-12-17T14:18:43.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="No title">
+<meta name="twitter:description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集.传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL 注">
+    
+    <link rel="shortcut icon" href="/zhangduo.github.io/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/zhangduo.github.io/img/brand.jpg)">
+      <div class="brand">
+        <a href="/zhangduo.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/zhangduo.github.io/img/person.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Dale</h5>
+          <a href="mailto:zhangduo914@gmail.com" title="zhangduo914@gmail.com" class="mail">zhangduo914@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://daleallen.github.io/zhangduo.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"></div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"></h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-17T14:18:43.600Z" itemprop="datePublished" class="page-time">
+  2017-12-17
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x51C6;&#x5907;" class="headerlink" title="&#x51C6;&#x5907;"></a>&#x51C6;&#x5907;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#传入参数"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x4F20;&#x5165;&#x53C2;&#x6570;" class="headerlink" title="&#x4F20;&#x5165;&#x53C2;&#x6570;"></a>&#x4F20;&#x5165;&#x53C2;&#x6570;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传入单个参数"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x4F20;&#x5165;&#x5355;&#x4E2A;&#x53C2;&#x6570;" class="headerlink" title="&#x4F20;&#x5165;&#x5355;&#x4E2A;&#x53C2;&#x6570;"></a>&#x4F20;&#x5165;&#x5355;&#x4E2A;&#x53C2;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传入多个参数"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x4F20;&#x5165;&#x591A;&#x4E2A;&#x53C2;&#x6570;" class="headerlink" title="&#x4F20;&#x5165;&#x591A;&#x4E2A;&#x53C2;&#x6570;"></a>&#x4F20;&#x5165;&#x591A;&#x4E2A;&#x53C2;&#x6570;</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-mybatis-参数传递"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title"></h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-12-17 22:18:43" datetime="2017-12-17T14:18:43.600Z"  itemprop="datePublished">2017-12-17</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集.传入的情况分为两种情况:</p>
+<p>①SQL语句的拼接,比如表名,like 条件等;</p>
+<p>②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 <code>?</code> 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:</p>
+<ul>
+<li>必须按照 ? 的顺序依次传入参数</li>
+<li>这里很容易以 SQL 注入的方式攻击数据库</li>
+</ul>
+<p>为了避免安全问题,应该对传入参数进行转义和类型检查</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>1.首先创建一个表 User:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE user (</span><br><span class="line">  id          INT AUTO_INCREMENT</span><br><span class="line">    PRIMARY KEY,</span><br><span class="line">  userName    VARCHAR(50)  NULL,</span><br><span class="line">  userAge     INT          NULL,</span><br><span class="line">  userAddress VARCHAR(200) NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>2 然后插入两条数据:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO test.user (userName, userAge, userAddress) VALUES (&apos;summer&apos;, 100, &apos;shanghai,pudong&apos;);</span><br><span class="line">INSERT INTO test.user (userName, userAge, userAddress) VALUES (&apos;spring&apos;, 120, &apos;shenzhen&apos;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="传入参数"><a href="#传入参数" class="headerlink" title="传入参数"></a>传入参数</h2><p>SQL 语句定义在 Mapper.xml 文件中,在 mybatis 中,对于可以用 ? 替代的参数使用 <code>#{}</code> 的形式传递参数,这种情况下会对参数进行转义和类型检查<br>对于其他类型的参数均使用<code>${}</code>的形式,这种情况没有转义和类型检查,因为完全没有必要.但要注意不要混淆两种情况</p>
+<h3 id="传入单个参数"><a href="#传入单个参数" class="headerlink" title="传入单个参数"></a>传入单个参数</h3><p>如果只传入一个参数的情况下,只需要做到如下几点</p>
+<ul>
+<li>接口文件中,声明方法参数 <code>HashMap&lt;String,Object&gt; getUser(int id);</code></li>
+<li>Mapper 文件中,其中 parameterType 选填,MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getUser&quot; parameterType=&quot;int&quot; resultType=&quot;java.util.HashMap&quot;&gt;</span><br><span class="line">    SELECT * FROM user WHERE id=#&#123;id&#125;;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="传入多个参数"><a href="#传入多个参数" class="headerlink" title="传入多个参数"></a>传入多个参数</h3><p>传入多个参数,原想继续使用传入单个参数的方法,意料之外的报错了,根据报错信息,如果继续使用上述接口依次传入多个参数,在 Mapper 文件中,要按照参数顺序编号填写:</p>
+<ul>
+<li>接口文件中,声明方法参数 <code>HashMap&lt;String,Object&gt; getUser(int id,String name);</code></li>
+<li>Mapper 文件中,由于两个参数类型不同,再设置 parameterType 就不合适了<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getUser&quot; resultType=&quot;java.util.HashMap&quot;&gt;</span><br><span class="line">    SELECT * FROM user WHERE id=#&#123;0&#125; and userName = #&#123;1&#125;;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这种方法虽然解决了问题,但是对于依然需要注意参数的顺序,另外对后续维护也有影响.因为本质上是传入了一个参数数组,可以另外采用传入一个 Map,这样就不需要特意参数的传入顺序.</p>
+<ul>
+<li>接口文件,声明方法 ‘HashMap<string,object> getUser(HashMap parmarMap);’</string,object></li>
+<li>Mapper 文件中,将顺序编号改回原来的参数名:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getUser&quot; resultType=&quot;java.util.HashMap&quot;&gt;</span><br><span class="line">    SELECT * FROM user WHERE id=#&#123;id&#125; and userName = #&#123;name&#125;;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-12-17T14:18:43.600Z" itemprop="dateUpdated">2017-12-17 22:18:43</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/zhangduo.github.io/2017/12/17/mybatis-参数传递/" target="_blank" rel="external">https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/</a>
+        
+    </div>
+    <footer>
+        <a href="https://daleallen.github.io/zhangduo.github.io">
+            <img src="/zhangduo.github.io/img/person.jpg" alt="Dale">
+            Dale
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&title=Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&title=Dale's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/zhangduo.github.io/2017/10/14/js异步编程实践/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">javascript 异步编程实践</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/zhangduo.github.io/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/zhangduo.github.io/img/wechat.jpg" data-alipay="/zhangduo.github.io/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Dale &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&title=《No title》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&title=《No title》 — Dale's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/zhangduo.github.io/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
