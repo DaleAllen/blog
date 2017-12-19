@@ -13,24 +13,25 @@
     
     
     
-    <title>No title | Dale&#39;s blog | Dale Zhang&#39;s blog</title>
+    <title>MyBatis 系列之参数传递 | Dale&#39;s blog | Dale Zhang&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
-    <meta name="description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集.传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL 注">
+    <meta name="keywords" content="MyBatis java">
+    <meta name="description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集,传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL">
+<meta name="keywords" content="MyBatis java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="No title">
-<meta property="og:url" content="https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/index.html">
+<meta property="og:title" content="MyBatis 系列之参数传递">
+<meta property="og:url" content="https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/index.html">
 <meta property="og:site_name" content="Dale&#39;s blog">
-<meta property="og:description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集.传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL 注">
+<meta property="og:description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集,传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-17T14:18:43.600Z">
+<meta property="og:updated_time" content="2017-12-19T12:21:36.310Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="No title">
-<meta name="twitter:description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集.传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL 注">
+<meta name="twitter:title" content="MyBatis 系列之参数传递">
+<meta name="twitter:description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集,传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL">
     
     <link rel="shortcut icon" href="/zhangduo.github.io/img/favicon.png">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -116,7 +117,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis"></div>
+        <div class="flex-col header-title ellipsis">MyBatis 系列之参数传递</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -138,13 +139,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title"></h1>
+        <h1 class="title">MyBatis 系列之参数传递</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-12-17T14:18:43.600Z" itemprop="datePublished" class="page-time">
-  2017-12-17
+                <time datetime="2017-12-17T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-12-18
 </time>
 
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/zhangduo.github.io/categories/MyBatis/">MyBatis</a></li></ul>
 
             
         </h5>
@@ -169,11 +172,13 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title"></h1>
+        <h1 class="post-card-title">MyBatis 系列之参数传递</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-12-17 22:18:43" datetime="2017-12-17T14:18:43.600Z"  itemprop="datePublished">2017-12-17</time>
+            <time class="post-time" title="2017-12-18 00:00:00" datetime="2017-12-17T16:00:00.000Z"  itemprop="datePublished">2017-12-18</time>
 
             
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/zhangduo.github.io/categories/MyBatis/">MyBatis</a></li></ul>
+
 
 
             
@@ -184,7 +189,8 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集.传入的情况分为两种情况:</p>
+            <hr>
+<p>在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集,传入的情况分为两种情况:</p>
 <p>①SQL语句的拼接,比如表名,like 条件等;</p>
 <p>②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 <code>?</code> 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:</p>
 <ul>
@@ -192,6 +198,7 @@
 <li>这里很容易以 SQL 注入的方式攻击数据库</li>
 </ul>
 <p>为了避免安全问题,应该对传入参数进行转义和类型检查</p>
+<a id="more"></a>
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>1.首先创建一个表 User:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE user (</span><br><span class="line">  id          INT AUTO_INCREMENT</span><br><span class="line">    PRIMARY KEY,</span><br><span class="line">  userName    VARCHAR(50)  NULL,</span><br><span class="line">  userAge     INT          NULL,</span><br><span class="line">  userAddress VARCHAR(200) NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>2 然后插入两条数据:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO test.user (userName, userAge, userAddress) VALUES (&apos;summer&apos;, 100, &apos;shanghai,pudong&apos;);</span><br><span class="line">INSERT INTO test.user (userName, userAge, userAddress) VALUES (&apos;spring&apos;, 120, &apos;shenzhen&apos;);</span><br></pre></td></tr></table></figure></p>
@@ -221,12 +228,12 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-12-17T14:18:43.600Z" itemprop="dateUpdated">2017-12-17 22:18:43</time>
+    最后更新时间：<time datetime="2017-12-19T12:21:36.310Z" itemprop="dateUpdated">2017-12-19 20:21:36</time>
 </span><br>
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/zhangduo.github.io/2017/12/17/mybatis-参数传递/" target="_blank" rel="external">https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/zhangduo.github.io/2017/12/18/mybatis-参数传递/" target="_blank" rel="external">https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/</a>
         
     </div>
     <footer>
@@ -246,6 +253,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/zhangduo.github.io/tags/MyBatis-java/">MyBatis java</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -254,7 +263,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&title=Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/&title=《MyBatis 系列之参数传递》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -264,22 +273,25 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&title=Dale's blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/&title=《MyBatis 系列之参数传递》 — Dale's blog&source=
+在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集,传入的情况分为两种情况:
+①SQL语句的拼接,比如表名,like 条件等;
+②S..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MyBatis 系列之参数传递》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -398,7 +410,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&title=《No title》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/&title=《MyBatis 系列之参数传递》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -408,22 +420,25 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&title=《No title》 — Dale's blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/&title=《MyBatis 系列之参数传递》 — Dale's blog&source=
+在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集,传入的情况分为两种情况:
+①SQL语句的拼接,比如表名,like 条件等;
+②S..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MyBatis 系列之参数传递》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -434,7 +449,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://daleallen.github.io/zhangduo.github.io/2017/12/17/mybatis-参数传递/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://daleallen.github.io/zhangduo.github.io/2017/12/18/mybatis-参数传递/" alt="微信分享二维码">
 </div>
 
 
