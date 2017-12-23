@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>使用Amazon AWS 搭建 Shadowsocks 服务 | Dale&#39;s blog | Dale Zhang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Shadowsocks">
+    <meta name="description" content="由于众所周知的原因,我们不得不使用 VPN,使用过众多的相关服务,免费的服务网速不好,而且有失效要求.收费的服务碰上某些特殊时期也得JJ,能不能挺过来也得看运气.经历的次数多了也浪费了不少时间和精力,倒不如自己动手丰衣足食.">
+<meta name="keywords" content="Shadowsocks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Amazon AWS 搭建 Shadowsocks 服务">
+<meta property="og:url" content="https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/index.html">
+<meta property="og:site_name" content="Dale&#39;s blog">
+<meta property="og:description" content="由于众所周知的原因,我们不得不使用 VPN,使用过众多的相关服务,免费的服务网速不好,而且有失效要求.收费的服务碰上某些特殊时期也得JJ,能不能挺过来也得看运气.经历的次数多了也浪费了不少时间和精力,倒不如自己动手丰衣足食.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-23T09:50:07.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Amazon AWS 搭建 Shadowsocks 服务">
+<meta name="twitter:description" content="由于众所周知的原因,我们不得不使用 VPN,使用过众多的相关服务,免费的服务网速不好,而且有失效要求.收费的服务碰上某些特殊时期也得JJ,能不能挺过来也得看运气.经历的次数多了也浪费了不少时间和精力,倒不如自己动手丰衣足食.">
+    
+    <link rel="shortcut icon" href="/zhangduo.github.io/img/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/zhangduo.github.io/img/brand.jpg)">
+      <div class="brand">
+        <a href="/zhangduo.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/zhangduo.github.io/img/person.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Dale</h5>
+          <a href="mailto:zhangduo914@gmail.com" title="zhangduo914@gmail.com" class="mail">zhangduo914@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://daleallen.github.io/zhangduo.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用Amazon AWS 搭建 Shadowsocks 服务</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用Amazon AWS 搭建 Shadowsocks 服务</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-22T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-12-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/zhangduo.github.io/categories/实用工具/">实用工具</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x5B89;&#x88C5;" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x914D;&#x7F6E;" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动服务"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x542F;&#x52A8;&#x670D;&#x52A1;" class="headerlink" title="&#x542F;&#x52A8;&#x670D;&#x52A1;"></a>&#x542F;&#x52A8;&#x670D;&#x52A1;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#防火墙设置"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#&#x9632;&#x706B;&#x5899;&#x8BBE;&#x7F6E;" class="headerlink" title="&#x9632;&#x706B;&#x5899;&#x8BBE;&#x7F6E;"></a>&#x9632;&#x706B;&#x5899;&#x8BBE;&#x7F6E;</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-使用Amazon aws 搭建Shadowsocks服务器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用Amazon AWS 搭建 Shadowsocks 服务</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-12-23 00:00:00" datetime="2017-12-22T16:00:00.000Z"  itemprop="datePublished">2017-12-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/zhangduo.github.io/categories/实用工具/">实用工具</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <hr>
+<p>由于众所周知的原因,我们不得不使用 VPN,使用过众多的相关服务,免费的服务网速不好,而且有失效要求.收费的服务碰上某些特殊时期也得JJ,能不能挺过来也得看运气.经历的次数多了也浪费了不少时间和精力,倒不如自己动手丰衣足食.<br><a id="more"></a></p>
+<p>说一下为什么选择 Amazon AWS,因为处于推广期,有一年的免费试用,对于搭建 Shadowsocks 服务而言免费版提供的资源绰绰有余,每个月拥有30G 流量,如果不是整天看 youtube 视频就无需担心</p>
+<p>注册账号注意事项:</p>
+<ul>
+<li>你需要一张 Visa 或者 Master 信用卡,中间会扣除1美元用来验证身份(最后会取消)</li>
+<li>需要留<strong>真实手机号</strong>,会有电话打过来验证身份,虽然是英文只要把屏幕上的验证信息输入就 ok</li>
+<li>记住注册日期,避免一年后超支扣费</li>
+</ul>
+<p>接下去创建实例,按照屏幕信息选择镜像,注意选择免费套餐(页面中有提示),最后按照提示使用 ssh连接主机</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用 yum 安装 python 的包管理工具 pip,然后用 pip 安装 shadowsocks:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yum install python-setuptools &amp;&amp; easy_install pip</span><br><span class="line">$ pip install shadowsocks</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>接下来新建一个文件夹并创建配置文件:<code>mkdir shadowsocks &amp;&amp; cd shadowsocks &amp;&amp; vi shadowsocks.json</code>,配置文件如下所示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;server&quot;: &quot;*.*.*.*&quot;,      --- 填写私有 IP</span><br><span class="line">    &quot;server_port&quot;: **,        --- 自定义对外端口</span><br><span class="line">    &quot;local_address&quot;: &quot;127.0.0.1&quot;,</span><br><span class="line">    &quot;local_port&quot;: 1080,</span><br><span class="line">    &quot;password&quot;: &quot;****&quot;,       --- 密码</span><br><span class="line">    &quot;timeout&quot;: 300,           --- 超时时间</span><br><span class="line">    &quot;method&quot;: &quot;aes-256-cfb&quot;,  --- 加密方式</span><br><span class="line">    &quot;fast_open&quot;: false        --- 要开启需要服务端和客户端都是 linux 3.7+</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中IPV4共有IP,可以在控制台管理页面-实例中直接找到,私有IP 可以登录到服务器中使用<code>ifconfig</code>命令获取.或者在实例页面,右键单击实例列表-联网-管理IP地址中查看.</p>
+<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><p>启动命令是<code>ssserver</code>命令,指定使用前面创建好的配置文件:<br>‘ssserver -c <to_your_path>/shadowsocks.json -d start’<br>这样就启动了服务,如果想要运行在后台呢,网上很多文档介绍说使用<code>nohup</code>命令,但是观察<code>ssserver --help</code>的介绍,只要将日志输出到控制台改为输出到本地文件中即可,也方便分析日志信息.最终命令如下:<br>‘ssserver -c <to_your_path>/shadowsocks.json -d start –log-file <to_your_path>/ss.log –pid-file <to_your_path>/ss.pid’</to_your_path></to_your_path></to_your_path></to_your_path></p>
+<h2 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h2><p>最后还要设置防火墙,默认情况下 AWS只开放了 22 端口用于 SSH 连接.在控制台-网络与安全-安全组-右键安全组列表编辑入站规则-选择”自定义TCP规则”,将配置文件中指定的端口开放</p>
+<p>最后在 shadowsocks 客户端中填写信息,内容和配置文件中保持一致, over!</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-12-23T09:50:07.772Z" itemprop="dateUpdated">2017-12-23 17:50:07</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/" target="_blank" rel="external">https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/</a>
+        
+    </div>
+    <footer>
+        <a href="https://daleallen.github.io/zhangduo.github.io">
+            <img src="/zhangduo.github.io/img/person.jpg" alt="Dale">
+            Dale
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/zhangduo.github.io/tags/Shadowsocks/">Shadowsocks</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/&title=《使用Amazon AWS 搭建 Shadowsocks 服务》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/&title=《使用Amazon AWS 搭建 Shadowsocks 服务》 — Dale's blog&source=
+由于众所周知的原因,我们不得不使用 VPN,使用过众多的相关服务,免费的服务网速不好,而且有失效要求.收费的服务碰上某些特殊时期也得JJ,能不能挺过来也..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Amazon AWS 搭建 Shadowsocks 服务》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/zhangduo.github.io/2017/12/18/mybatis-参数传递/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MyBatis 系列之参数传递</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/zhangduo.github.io/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/zhangduo.github.io/img/wechat.jpg" data-alipay="/zhangduo.github.io/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Dale &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/&title=《使用Amazon AWS 搭建 Shadowsocks 服务》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/&title=《使用Amazon AWS 搭建 Shadowsocks 服务》 — Dale's blog&source=
+由于众所周知的原因,我们不得不使用 VPN,使用过众多的相关服务,免费的服务网速不好,而且有失效要求.收费的服务碰上某些特殊时期也得JJ,能不能挺过来也..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Amazon AWS 搭建 Shadowsocks 服务》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://daleallen.github.io/zhangduo.github.io/2017/12/23/使用Amazon aws 搭建Shadowsocks服务器/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/zhangduo.github.io/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
