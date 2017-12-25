@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>ES6 与 webapck | Dale&#39;s blog | Dale Zhang&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="ES6 webpack3">
+    <meta name="description" content="写js代码时,经常需要考虑浏览器的兼容性,而新的语法ES6,甚至ES7在旧版本浏览器中无法使用.于是诞生了babel,polyfill等,那么如何和构建工具webpack结合使用呢.">
+<meta name="keywords" content="ES6 webpack3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 与 webapck">
+<meta property="og:url" content="https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/index.html">
+<meta property="og:site_name" content="Dale&#39;s blog">
+<meta property="og:description" content="写js代码时,经常需要考虑浏览器的兼容性,而新的语法ES6,甚至ES7在旧版本浏览器中无法使用.于是诞生了babel,polyfill等,那么如何和构建工具webpack结合使用呢.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-09T16:41:01.254Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 与 webapck">
+<meta name="twitter:description" content="写js代码时,经常需要考虑浏览器的兼容性,而新的语法ES6,甚至ES7在旧版本浏览器中无法使用.于是诞生了babel,polyfill等,那么如何和构建工具webpack结合使用呢.">
+    
+    <link rel="shortcut icon" href="/zhangduo.github.io/img/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/zhangduo.github.io/img/brand.jpg)">
+      <div class="brand">
+        <a href="/zhangduo.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/zhangduo.github.io/img/person.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Dale</h5>
+          <a href="mailto:zhangduo914@gmail.com" title="zhangduo914@gmail.com" class="mail">zhangduo914@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/DaleAllen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/zhangduo.github.io/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ES6 与 webapck</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">ES6 与 webapck</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-07T16:43:05.000Z" itemprop="datePublished" class="page-time">
+  2017-08-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#babel-和-polyfill"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#babel-&#x548C;-polyfill" class="headerlink" title="babel &#x548C; polyfill"></a>babel &#x548C; polyfill</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#bable-loader"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#bable-loader" class="headerlink" title="bable-loader"></a>bable-loader</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#babel-runtime"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#babel-runtime" class="headerlink" title="babel-runtime"></a>babel-runtime</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用-polyfill"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;-polyfill" class="headerlink" title="&#x4F7F;&#x7528; polyfill"></a>&#x4F7F;&#x7528; polyfill</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发及热部署"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x5F00;&#x53D1;&#x53CA;&#x70ED;&#x90E8;&#x7F72;" class="headerlink" title="&#x5F00;&#x53D1;&#x53CA;&#x70ED;&#x90E8;&#x7F72;"></a>&#x5F00;&#x53D1;&#x53CA;&#x70ED;&#x90E8;&#x7F72;</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-ES6与webapck"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ES6 与 webapck</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-08 00:43:05" datetime="2017-08-07T16:43:05.000Z"  itemprop="datePublished">2017-08-08</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>写<code>js</code>代码时,经常需要考虑浏览器的兼容性,而新的语法<code>ES6</code>,甚至<code>ES7</code>在旧版本浏览器中无法使用.于是诞生了<code>babel</code>,<code>polyfill</code>等,<br>那么如何和构建工具<code>webpack</code>结合使用呢.<br><a id="more"></a></p>
+<h2 id="babel-和-polyfill"><a href="#babel-和-polyfill" class="headerlink" title="babel 和 polyfill"></a>babel 和 polyfill</h2><p><code>babel</code>是一个<code>JavaScript</code>编译器,借助转换器可以使用最新的语法,而不必等待浏览器支持.但是只支持新的语法,即所谓的<strong>语法糖</strong>,不支持新增的<code>API</code>,<br>如<code>Promise</code>全局对象.<br><code>polyfill</code>是一种垫片,使用旧版本方法模拟出新的<code>API</code>,但不保证支持所有特性.<br>目前有两种使用方法,一种是添加到全局环境中和增加原型方法;另外一种是作为一个<code>library</code>使用,不会污染全局环境和修改原型</p>
+<h3 id="bable-loader"><a href="#bable-loader" class="headerlink" title="bable-loader"></a>bable-loader</h3><p>安装<code>bable</code>及<code>loader</code>:<br><code>npm install --save-dev babel-cli babel-core babel-preset-es2015 babel-loader</code><br>或者<br><code>yarn add --dev babel-cli babel-core babel-preset-es2015 babel-loader</code><br>其中babel-cli为命令行转码;<br>babel-preset-es2015为E2015转码规则,也可以按需安装其他的转码规则;<br>babel v6中已经babel API移到babel core中,所以安装babel-core而不是babel</p>
+<p>在<code>webpack</code>中增加以下内容,</p>
+<pre><code>- `test`:规定需要转码的文件类型
+- `include`:大多时候我们并不想转码第三方库的代码,因此使用`include`指定源码的文件夹,也可以使用`exclude`排除第三库所在的文件夹,支持正则表达.
+- `loader`:需要注意到是`webpack`新版本中`loader`需为`*-loader`
+- `cacheDirectory`:如果设置了该目录会将转换结果缓存起来,加快转码速度.可以设置为`true`可以,会使用默认路径`node_modules/.cache/babel-loader`,如果找不到`node_modules`,会使用系统默认临时文件目录
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rules: [</span><br><span class="line">    &#123;</span><br><span class="line">        test: /\.js/,</span><br><span class="line">        include: /to/your/path/src,</span><br><span class="line">        use: [&#123;</span><br><span class="line">            loader: &apos;babel-loader&apos;,</span><br><span class="line">            options: &#123;</span><br><span class="line">                cacheDirectory: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>默认情况下babel并不会转码你的代码,可以在使用<code>options</code>指定转码规则,但是更推荐将该配置写到文件.babelrc中,打包过程中会自动读取该文件</p>
+<h3 id="babel-runtime"><a href="#babel-runtime" class="headerlink" title="babel-runtime"></a>babel-runtime</h3><p>这里存在一个问题是,babel在每个文件中都插入了帮助函数,这样造成了代码的冗余.而<code>babel-runtime</code>的插件将这些帮助函数的代码转化为 require 语句,<br>比如自动引入<code>babel-runtime/regenerator</code>当你使用<code>generators/async</code>函数.<br>因此安装插件<code>babel-plugin-transform-runtime</code>作为开发依赖,而其本身依赖于<code>babel-runtime</code><br><code>npm install --save babel-runtime</code><br><code>npm install --save-dev babel-plugin-transform-runtime</code><br>或者<br><code>yarn add babel-runtime</code><br><code>yarn add --dev babel-plugin-transform-runtime</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [&quot;es2015&quot;],</span><br><span class="line">  &quot;plugins&quot;: [&quot;transform-runtime&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以为其指定参数 options<br>1.helpers,如果为 true,则将帮助函数插入文件中,若为 false,则指向<code>moduleName</code>,默认是<code>true</code><br>2.polyfill,如果为 true则引入polyfill,作为工具函数不污染全局环境,默认为<code>true</code><br>3.regenerator,默认是<code>true</code>,同样不会污染全局环境<br>4.moduleName,默认是<code>babel-runtime</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [&quot;es2015&quot;],</span><br><span class="line">  &quot;plugins&quot;: [&quot;transform-runtime&quot;,&#123;</span><br><span class="line">      &quot;helpers&quot;: false,</span><br><span class="line">      &quot;polyfill&quot;: false,</span><br><span class="line">      &quot;regenerator&quot;: true,</span><br><span class="line">      &quot;moduleName&quot;: &quot;babel-runtime&quot;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用-polyfill"><a href="#使用-polyfill" class="headerlink" title="使用 polyfill"></a>使用 polyfill</h3><p>如果想要使用像<code>Promise</code>这种新增的全局对象,这时候就需要引入垫片<code>polyfill</code>,这里可以使用<code>babel-polyfill</code>.<br>不同的是<code>babel</code>转换是通过后台转换的,<code>babel-polyfill</code>是用于浏览器的.所以安装是:<code>npm install --save babel-polyfill</code></p>
+<p>实践后发现,完整的垫片文件很大,不符合要求.但是大多时候我们并不会使用到所有的新<code>API</code>,完全可以需要的时候才在文件中引用.<br>而引用的相同文件可以被<code>webpack.optimize.CommonsChunkPlugin</code>插件提取到公共文件中.</p>
+<p>观察<code>babel-polyfill</code>的依赖于<code>babel-runtime</code>,<code>core-js</code>和<code>regenerator-runtime</code>.<br>一般情况下引用<code>core-js</code>即可,而<code>core-js</code>针对很多场景可以有不同的引入:</p>
+<ul>
+<li>浏览器引用完整编译 client<ul>
+<li>core.js 所有特性</li>
+<li>shim.js 只包括标准代码</li>
+<li>library.js 所有特性,但是不污染全局环境</li>
+</ul>
+</li>
+<li>按需引入<ul>
+<li>fn 文件夹中指定内容</li>
+<li>library 文件夹中指定内容,但是不污染全局环境</li>
+</ul>
+</li>
+<li>按需引入一系列相关的特性,比如 es6/array,包括 ES6 Array 所有特性</li>
+<li>自定义 引入modules文件夹下,但是需要有足够的了解</li>
+</ul>
+<h2 id="开发及热部署"><a href="#开发及热部署" class="headerlink" title="开发及热部署"></a>开发及热部署</h2><p>在最终的打包结果中,包含着不少<code>webpack</code>的代码,大多时候我们只想对比<code>babel</code>转换前后的代码,这个时候可以单独执行<code>babel</code>命令来查看转码后的结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">babel [options] &lt;files ...&gt;</span><br><span class="line">&lt;!-- 转码结果写入一个文件 --&gt;</span><br><span class="line">babel example.js -o compiled.js</span><br><span class="line">&lt;!-- 整个目录转码 --&gt;</span><br><span class="line">babel src -d lib</span><br><span class="line">&lt;!-- 监听文件的变化,增量更新 --&gt;</span><br><span class="line">babel -w ....</span><br></pre></td></tr></table></figure></p>
+<p>利用<code>babel</code>提供的监听功能可以不用敲命令实时查看转码代码,由于采用的增量跟新也并不会影响性能.<br>但是想更进一步,将命令加入到<code>package.json</code>的<code>scripts</code>中,使用<code>npm run</code>调用:<br><code>&quot;babel&quot;: &quot;nohup babel src -d dist/babel -w &gt; /dev/null &amp;&quot;</code><br>其中<code>nohup</code>命令将任务调到后台执行,将结果输出到<code>/dev/null</code>等于丢弃到垃圾桶中.<br>这个时候产生了新的问题,如何查看后台是否在运行该程序以及关闭该程序,如果重复执行太多肯定不是我们想要的,手动<code>ps</code>命令查看进程号再<code>kill</code>掉就行.<br>原本想做一个防重入的功能,但是<code>npm scripts</code>中无法包含分号,又不想再增加一个<code>shell</code>脚本,因此做了以下工作:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;babelpid&quot;: &quot;ps -ef|grep &apos;babel src -d dist/babel -w&apos; |grep -v grep |awk &apos;&#123;print $2&#125;&apos;&quot;,</span><br><span class="line">&quot;stopbabel&quot;: &quot;npm run babelpid --silent|xargs kill -9&quot;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>babelpid 用来查看进程号,其中<code>grep -v grep</code>用来排除<code>grep</code>本身,<code>awk</code>命令用来只打印出需要的进程号</li>
+<li>stopbabel 用来杀掉进程,可以批量删除.其中将<code>npm --silent</code>过滤掉<code>npm</code>本身的输出信息,<code>xargs</code>将前面的程序标准输出作为后面程序的参数</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-10-09T16:41:01.254Z" itemprop="dateUpdated">2017-10-10 00:41:01</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/zhangduo.github.io/2017/08/08/ES6与webapck/" target="_blank" rel="external">https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/</a>
+        
+    </div>
+    <footer>
+        <a href="https://daleallen.github.io/zhangduo.github.io">
+            <img src="/zhangduo.github.io/img/person.jpg" alt="Dale">
+            Dale
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/zhangduo.github.io/tags/ES6-webpack3/">ES6 webpack3</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/&title=《ES6 与 webapck》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/&title=《ES6 与 webapck》 — Dale's blog&source=写js代码时,经常需要考虑浏览器的兼容性,而新的语法ES6,甚至ES7在旧版本浏览器中无法使用.于是诞生了babel,polyfill等,那么如何和构建工..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ES6 与 webapck》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/zhangduo.github.io/2017/08/31/js判断浏览器/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">js判断浏览器</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/zhangduo.github.io/2017/08/01/数组去重/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">数组去重</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/zhangduo.github.io/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/zhangduo.github.io/img/wechat.jpg" data-alipay="/zhangduo.github.io/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Dale &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/&title=《ES6 与 webapck》 — Dale's blog&pic=https://daleallen.github.io/zhangduo.github.io/img/person.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/&title=《ES6 与 webapck》 — Dale's blog&source=写js代码时,经常需要考虑浏览器的兼容性,而新的语法ES6,甚至ES7在旧版本浏览器中无法使用.于是诞生了babel,polyfill等,那么如何和构建工..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ES6 与 webapck》 — Dale's blog&url=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/&via=https://daleallen.github.io/zhangduo.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://daleallen.github.io/zhangduo.github.io/2017/08/08/ES6与webapck/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/zhangduo.github.io/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

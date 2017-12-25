@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Dale&#39;s blog">
 <meta property="og:description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集,传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-19T12:21:36.310Z">
+<meta property="og:updated_time" content="2017-12-25T09:54:34.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis 系列之参数传递">
 <meta name="twitter:description" content="在实际开发中,大多数情况下都需要对 SQL 传入参数以获得想要的结果集,传入的情况分为两种情况: ①SQL语句的拼接,比如表名,like 条件等; ②SQL 中作为条件输入的参数,这种情况下,一般不推荐使用字符串拼接,因为拼接比较麻烦,容易出错,SQL 允许使用 ? 作为占位符来代替参数,只需要依次传入参数数组.但是这样依然有两点问题:  必须按照 ? 的顺序依次传入参数 这里很容易以 SQL">
@@ -215,12 +215,8 @@
 <li>Mapper 文件中,由于两个参数类型不同,再设置 parameterType 就不合适了<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getUser&quot; resultType=&quot;java.util.HashMap&quot;&gt;</span><br><span class="line">    SELECT * FROM user WHERE id=#&#123;0&#125; and userName = #&#123;1&#125;;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>这种方法虽然解决了问题,但是对于依然需要注意参数的顺序,另外对后续维护也有影响.因为本质上是传入了一个参数数组,可以另外采用传入一个 Map,这样就不需要特意参数的传入顺序.</p>
-<ul>
-<li>接口文件,声明方法 ‘HashMap<string,object> getUser(HashMap parmarMap);’</string,object></li>
-<li>Mapper 文件中,将顺序编号改回原来的参数名:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getUser&quot; resultType=&quot;java.util.HashMap&quot;&gt;</span><br><span class="line">    SELECT * FROM user WHERE id=#&#123;id&#125; and userName = #&#123;name&#125;;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<p>可以看到这种方式需要指定的参数的顺序,以为其本质上传递的是数组.正确的姿势是使用 <code>@Param</code> 注释:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 接口文件 --&gt;</span><br><span class="line">HashMap&lt;String,Object&gt; getUser(@Param int id,@Param String name);</span><br><span class="line"></span><br><span class="line">&lt;!-- Mapper 文件 --&gt;</span><br><span class="line">&lt;select id=&quot;getUser&quot; resultType=&quot;java.util.HashMap&quot;&gt;</span><br><span class="line">    SELECT * FROM user WHERE id=#&#123;id&#125; and userName = #&#123;name&#125;;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
+<p>根据业务场景需要,也可以直接传入一个参数的 <code>Map</code> 对象:<br>‘HashMap<string,object> getUser(HashMap parmarMap);’</string,object></p>
 
         </div>
 
@@ -228,7 +224,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-12-19T12:21:36.310Z" itemprop="dateUpdated">2017-12-19 20:21:36</time>
+    最后更新时间：<time datetime="2017-12-25T09:54:34.017Z" itemprop="dateUpdated">2017-12-25 17:54:34</time>
 </span><br>
 
 
